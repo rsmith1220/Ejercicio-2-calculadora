@@ -13,6 +13,7 @@ class Vector implements Calculadora{
     Main main = new Main();
     BufferedReader br = null;
     String line = "No hay archivo";
+    String ops = " ";
    
     ArrayList<String> ecu = new ArrayList<String>();
 
@@ -20,25 +21,31 @@ class Vector implements Calculadora{
         
         line = "No hay archivo";
         try{
-            FileReader fr = new FileReader(a); // lee el archivo
-            br = new BufferedReader(fr);
+            //File text = new File("C:/Users/rebe/Ejercicio 2 AED/datos.txt");
+            //Scanner esto = new Scanner(text);
+
+            File file = new File("datos.txt");
+
+            //Scanner esto = new Scanner(new File("Ejercicio 2 AED\\datos.txt"));
+            //FileReader fr = new FileReader("Ejercicio 2 AED\\datos.txt"); // lee el archivo
+            //br = new BufferedReader(fr);
+            
+            Scanner esto = new Scanner(file);
+
             //por cada linea del txt se hace un loop
-            while((line = br.readLine())!= null){
-                //imprime la linea del txt
-                System.out.println("La operacion a realizar "+line);
-
-                //String[] letrasSeparadas = lineaOperacion.split(" ");
-
-                String[] datos = data.split(" ");
-                    
-                for(String s: tmp){
-                    ecu.add(s);
-                }
+            while((esto.hasNextLine())){
+                
+                ops+=esto.nextLine();
+                System.out.println("\nDoc leido exitoso\n");
+                
                 
             }
-        }catch(IOException e){ //si hay una exepcion entonces el catch hace que no se cierre el programa
-            System.out.println("No");
+        }catch(Exception e){ 
+            System.out.println("\nNo se encontro el documento\n");
         }
+
+        String [] opt = ops.split(" "); // el txt esta separado por espacios
+
         //regresa la linea del txt o el mensaje de error
         return line;
     }
@@ -51,10 +58,15 @@ class Vector implements Calculadora{
     }
 
     public int operar(Stack b){
-         
+        String listString = " ";
 
-        for(int i = 0; i < ecu.length(); i++){
-            char c = ecu.charAt(i);
+        Scanner patos = new Scanner(new File("datos.txt"));
+        String input = patos.toString();
+        
+        System.out.println(listString);
+
+        for(int i = 0; i < input.length(); i++){
+            char c = input.charAt(i);
             int x = 0;
             int y = 0;
             int r = 0;
